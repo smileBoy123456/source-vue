@@ -9,8 +9,13 @@
 
 开源字节是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。
 
-* 前端采用Vue、Element UI。
-* 后端采用Spring Boot、Spring Security、Redis & Jwt。
+* PC端采用Vue、Element UI。
+* 后端采用Spring Boot、Mybatis-Plus、Spring Security、Redis & Jwt。
+* 移动端采用Vue、Uniapp、Uview。
+* 工作流使用Flowable、Bpmn.io。
+* 即时通讯使用T-io。
+* 表格解决方案使用Vxe-table。
+* 可视化大屏数据展示使用Vxe-table。
 * 权限认证使用Jwt，支持多终端认证系统。
 * 支持加载动态权限菜单，多方式轻松权限控制。
 * 高效率开发，使用代码生成器可以一键生成前后端代码。
