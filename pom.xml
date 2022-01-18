@@ -3,15 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
     <groupId>cn.source</groupId>
     <artifactId>source</artifactId>
     <version>3.8.1</version>
 
     <name>source</name>
-    <url>http://www.ruoyi.vip</url>
+    <url>http://8.136.213.245/index</url>
     <description>开源字节</description>
-    
+
     <properties>
         <source.version>3.8.1</source.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,7 +35,7 @@
         <log4j2.version>2.17.1</log4j2.version>
         <jwt.version>0.9.1</jwt.version>
     </properties>
-	
+
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
@@ -223,6 +223,10 @@
         <module>source-quartz</module>
         <module>source-generator</module>
         <module>source-common</module>
+        <!--新增CMS模块-->
+        <!--新增SCRM模块-->
+        <!--新增工作流模块-->
+        <!--新增IM模块-->
     </modules>
     <packaging>pom</packaging>
 
