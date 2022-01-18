@@ -3,8 +3,8 @@
     <div class="login-logo">
       <span> 开源字节 | 通行证</span>
     </div>
-    <h2 class="main-title">开源字节快速开发平台</h2>
-    <h3 class="sub-title">登录开源字节，与攻城狮一起交流优雅、分享快乐吧！</h3>
+    <h2 class="main-title"><span>开源字节</span></h2>
+    <h3 class="sub-title">登录开源字节，与攻城狮一起交流、分享快乐吧！</h3>
     <el-form
       ref="loginForm"
       :model="loginForm"
@@ -211,7 +211,7 @@ export default {
   height: 24px;
   margin-right: 10px;
   padding-right: 10px;
-  background-image: url(http://8.136.213.245/assets/logo_c_64.5eb3acc5.png);
+  background-image: url("../assets/logo/logo_w.png");
   background-repeat: no-repeat;
   background-size: auto 24px;
   display: inline-block;
@@ -232,11 +232,27 @@ export default {
 }
 .main-title {
   margin: 100px 0 0 0;
+  height: 34px;
   text-align: center;
   color: #ffffff;
+  background-image: url("../assets/logo/logo_w.png");
+  background-repeat: no-repeat;
+  background-size: auto 34px;
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  span {
+    line-height: 34px;
+    font-size: 34px;
+    height: 34px;
+    padding-left: 40px;
+    color: #ffffff;
+    vertical-align: middle;
+    font-weight: 600;
+  }
 }
 .sub-title {
-  margin: 20px 0 40px 0;
+  margin: 20px 0 60px 0;
   text-align: center;
   color: #ffffff;
 }
