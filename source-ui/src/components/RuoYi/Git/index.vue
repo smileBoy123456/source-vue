@@ -6,16 +6,16 @@
 
 <script>
 export default {
-  name: 'RuoYiGit',
+  name: "RuoYiGit",
   data() {
     return {
-      url: 'https://gitee.com/y_project/RuoYi-Vue'
-    }
+      url: "https://gitee.com/open-source-byte/source-vue",
+    };
   },
   methods: {
     goto() {
-      window.open(this.url)
-    }
-  }
-}
+      window.open(this.url);
+    },
+  },
+};
 </script>
