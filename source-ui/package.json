@@ -2,12 +2,11 @@
   "name": "ruoyi",
   "version": "3.8.1",
   "description": "开源字节",
-  "author": "若依",
+  "author": "詹Sir",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",
-    "build:prod": "vue-cli-service build",
-    "build:stage": "vue-cli-service build --mode staging",
+    "build": "vue-cli-service build",
     "preview": "node build/index.js --preview",
     "lint": "eslint --ext .js,.vue src"
   },
@@ -32,8 +31,8 @@
     "management-system"
   ],
   "repository": {
-    "type": "git",
-    "url": "https://gitee.com/y_project/RuoYi-Vue.git"
+    "type": "gitee",
+    "url": "https://gitee.com/open-source-byte/source-vue"
   },
   "dependencies": {
     "@riophae/vue-treeselect": "0.4.0",
