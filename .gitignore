@@ -42,3 +42,4 @@ nbdist/
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
+source-admin/src/main/resources/application-druid.yml
