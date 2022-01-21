@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="login-logo">
+    <div class="login-logo hidden-md-and-down">
       <span> 开源字节 | 通行证</span>
     </div>
     <h2 class="main-title"><span>开源字节</span></h2>
@@ -97,6 +97,7 @@
 import { getCodeImg } from "@/api/login";
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from "@/utils/jsencrypt";
+import "element-ui/lib/theme-chalk/display.css";
 
 export default {
   name: "Login",
@@ -218,7 +219,7 @@ export default {
   vertical-align: middle;
   zoom: 1;
   position: absolute;
-  left: 200px;
+  left: 150px;
   top: 50px;
   span {
     line-height: 24px;
