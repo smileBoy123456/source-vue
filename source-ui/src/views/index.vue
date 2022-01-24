@@ -1,117 +1,79 @@
 <template>
-  <div class="app-container home">
-    <el-row :gutter="20">
-      <el-col :sm="24" :lg="24" style="padding-left: 20px">
-        <h2>开源字节快速开发平台</h2>
-        <p>
-          一直想做一款快速开发平台，看了很多优秀的开源项目但是发现没有合适的。
-          于是利用空闲休息时间开始自己写了一套快速开发系统。如此有了开源字节。
-        </p>
-        <p>
-          <b>当前版本:</b> <span>v{{ version }}</span>
-        </p>
-        <p>
-          <el-tag type="danger">&yen;免费开源</el-tag>
-        </p>
-        <p>
-          <el-button
-            type="primary"
-            size="mini"
-            icon="el-icon-cloudy"
-            plain
-            @click="goTarget('https://gitee.com/open-source-byte/source-vue')"
-            >访问码云</el-button
-          >
-          <el-button
-            size="mini"
-            icon="el-icon-s-home"
-            plain
-            @click="goTarget('http://8.136.213.245')"
-            >访问主页</el-button
-          >
-        </p>
-      </el-col>
+  <div class="dashboard-editor-container">
+    <panel-group @handleSetLineChartData="handleSetLineChartData" />
+
+    <el-row style="background: #fff; padding: 16px 16px 0; margin-bottom: 32px">
+      <line-chart :chart-data="lineChartData" />
     </el-row>
   </div>
 </template>
 
 <script>
+import PanelGroup from "./dashboard/PanelGroup";
+import LineChart from "./dashboard/LineChart";
+
+const lineChartData = {
+  newVisitis: {
+    data1: [100, 120, 161, 134, 105, 160, 165],
+    data2: [120, 82, 91, 154, 162, 140, 145],
+    data3: [200, 192, 120, 144, 160, 130, 140],
+    data4: [180, 160, 151, 106, 145, 150, 130],
+  },
+  messages: {
+    data1: [200, 192, 120, 144, 160, 130, 140],
+    data2: [180, 160, 151, 106, 145, 150, 130],
+    data3: [200, 192, 120, 144, 160, 130, 140],
+    data4: [180, 160, 151, 106, 145, 150, 130],
+  },
+  purchases: {
+    data1: [80, 100, 121, 104, 105, 90, 100],
+    data2: [120, 90, 100, 138, 142, 130, 130],
+    data3: [200, 192, 120, 144, 160, 130, 140],
+    data4: [180, 160, 151, 106, 145, 150, 130],
+  },
+  shoppings: {
+    data1: [130, 140, 141, 142, 145, 150, 160],
+    data2: [120, 82, 91, 154, 162, 140, 130],
+    data3: [200, 192, 120, 144, 160, 130, 140],
+    data4: [180, 160, 151, 106, 145, 150, 130],
+  },
+};
+
 export default {
   name: "Index",
+  components: {
+    PanelGroup,
+    LineChart,
+  },
   data() {
     return {
-      // 版本号
-      version: "1.0.0",
+      lineChartData: lineChartData.newVisitis,
     };
   },
   methods: {
-    goTarget(href) {
-      window.open(href, "_blank");
+    handleSetLineChartData(type) {
+      this.lineChartData = lineChartData[type];
     },
   },
 };
 </script>
 
-<style scoped lang="scss">
-.home {
-  blockquote {
-    padding: 10px 20px;
-    margin: 0 0 20px;
-    font-size: 17.5px;
-    border-left: 5px solid #eee;
-  }
-  hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 0;
-    border-top: 1px solid #eee;
-  }
-  .col-item {
-    margin-bottom: 20px;
-  }
+<style lang="scss" scoped>
+.dashboard-editor-container {
+  padding: 32px;
+  background-color: #fff;
+  position: relative;
 
-  ul {
-    padding: 0;
-    margin: 0;
+  .chart-wrapper {
+    background: #fff;
+    padding: 16px 16px 0;
+    margin-bottom: 32px;
   }
+}
 
-  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  color: #676a6c;
-  overflow-x: hidden;
-
-  ul {
-    list-style-type: none;
-  }
-
-  h4 {
-    margin-top: 0px;
-  }
-
-  h2 {
-    margin-top: 10px;
-    font-size: 26px;
-    font-weight: 100;
-  }
-
-  p {
-    margin-top: 10px;
-
-    b {
-      font-weight: 700;
-    }
-  }
-
-  .update-log {
-    ol {
-      display: block;
-      list-style-type: decimal;
-      margin-block-start: 1em;
-      margin-block-end: 1em;
-      margin-inline-start: 0;
-      margin-inline-end: 0;
-      padding-inline-start: 40px;
-    }
+@media (max-width: 1024px) {
+  .chart-wrapper {
+    padding: 8px;
   }
 }
 </style>
