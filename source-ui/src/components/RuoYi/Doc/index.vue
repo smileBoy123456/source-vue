@@ -9,7 +9,7 @@ export default {
   name: "RuoYiDoc",
   data() {
     return {
-      url: "8.136.213.245",
+      url: "http://8.136.213.245",
     };
   },
   methods: {
