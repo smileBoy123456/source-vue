@@ -3,7 +3,7 @@
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
 
     <el-row style="background: #fff; padding: 32px 16px 0">
-      <line-chart :chart-data="lineChartData" />
+      <line-chart :chart-data="lineChartData" :height="lineHeight" />
     </el-row>
   </div>
 </template>
@@ -47,6 +47,7 @@ export default {
   },
   data() {
     return {
+      lineHeight: document.documentElement.clientHeight - 350 + "px", //实时屏幕高度
       lineChartData: lineChartData.newVisitis,
     };
   },
