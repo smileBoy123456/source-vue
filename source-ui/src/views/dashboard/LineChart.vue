@@ -73,8 +73,8 @@ export default {
         grid: {
           left: 10,
           right: 10,
-          bottom: 20,
-          top: 50,
+          bottom: 10,
+          top: 60,
           containLabel: true,
         },
         tooltip: {
@@ -107,7 +107,7 @@ export default {
             smooth: true,
             type: "line",
             data: data1,
-            animationDuration: 2800,
+            animationDuration: 800,
             animationEasing: "cubicInOut",
           },
           {
@@ -124,7 +124,7 @@ export default {
               },
             },
             data: data2,
-            animationDuration: 2800,
+            animationDuration: 800,
             animationEasing: "quadraticOut",
           },
           {
@@ -141,7 +141,7 @@ export default {
             smooth: true,
             type: "line",
             data: data3,
-            animationDuration: 2800,
+            animationDuration: 800,
             animationEasing: "cubicInOut",
           },
           {
@@ -158,7 +158,7 @@ export default {
               },
             },
             data: data4,
-            animationDuration: 2800,
+            animationDuration: 800,
             animationEasing: "quadraticOut",
           },
         ],
