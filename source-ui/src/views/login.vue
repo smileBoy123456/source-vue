@@ -206,6 +206,7 @@ export default {
   height: 100%;
   background-image: url("../assets/images/login-background2.jpg");
   background-size: cover;
+  background-color: #f4f4f4;
 }
 .login-logo {
   width: 200px;
