@@ -1,15 +1,5 @@
 package cn.source.web.controller.monitor;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import cn.source.common.annotation.Log;
 import cn.source.common.core.controller.BaseController;
 import cn.source.common.core.domain.AjaxResult;
@@ -18,10 +8,16 @@ import cn.source.common.enums.BusinessType;
 import cn.source.common.utils.poi.ExcelUtil;
 import cn.source.system.domain.SysLogininfor;
 import cn.source.system.service.ISysLogininforService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 系统访问记录
- * 
+ *
  * @author ruoyi
  */
 @RestController
