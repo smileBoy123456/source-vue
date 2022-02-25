@@ -213,6 +213,14 @@
                 <version>${source.version}</version>
             </dependency>
 
+            <!-- CMS模块-->
+            <dependency>
+                <groupId>cn.source</groupId>
+                <artifactId>source-cms</artifactId>
+                <version>${source.version}</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 
@@ -224,6 +232,7 @@
         <module>source-generator</module>
         <module>source-common</module>
         <!--新增CMS模块-->
+        <module>source-cms</module>
         <!--新增SCRM模块-->
         <!--新增工作流模块-->
         <!--新增IM模块-->

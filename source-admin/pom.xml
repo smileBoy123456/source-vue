@@ -43,6 +43,19 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!-- ECharts-->
+        <dependency>
+            <groupId>com.github.abel533</groupId>
+            <artifactId>ECharts</artifactId>
+            <version>2.2.7</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+
         <!-- 核心模块-->
         <dependency>
             <groupId>cn.source</groupId>
@@ -61,17 +74,10 @@
             <artifactId>source-generator</artifactId>
         </dependency>
 
-        <!-- ECharts-->
+        <!-- cms-->
         <dependency>
-            <groupId>com.github.abel533</groupId>
-            <artifactId>ECharts</artifactId>
-            <version>2.2.7</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.6</version>
+            <groupId>cn.source</groupId>
+            <artifactId>source-cms</artifactId>
         </dependency>
 
     </dependencies>
