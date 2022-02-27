@@ -30,9 +30,9 @@ public class CmsServiceItem extends BaseEntity
     @Excel(name = "内容")
     private String content;
 
-    /** 启用 */
-    @Excel(name = "启用")
-    private Long state;
+    /** 状态（0正常 1关闭） */
+    private String state;
+
 
     public void setId(Long id)
     {
@@ -70,12 +70,12 @@ public class CmsServiceItem extends BaseEntity
     {
         return content;
     }
-    public void setState(Long state)
+    public void setState(String state)
     {
         this.state = state;
     }
 
-    public Long getState()
+    public String getState()
     {
         return state;
     }
