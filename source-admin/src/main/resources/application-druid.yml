@@ -6,9 +6,9 @@ spring:
         druid:
             # 主库数据源
             master:
-                url: jdbc:mysql://rm-bp175epip84c43030vo.mysql.rds.aliyuncs.com/source-vue-dev?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-                username: kyzj_dev
-                password: kyzj_dev_123
+                url: jdbc:mysql://localhost:3506/source-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+                username: root
+                password:
             # 从库数据源
             slave:
                 # 从数据源开关/默认关闭

@@ -1,75 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-#foreach($column in $columns)
-#if($column.query)
-#set($dictType=$column.dictType)
-#set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
-#set($parentheseIndex=$column.columnComment.indexOf("（"))
-#if($parentheseIndex != -1)
-#set($comment=$column.columnComment.substring(0, $parentheseIndex))
-#else
-#set($comment=$column.columnComment)
-#end
-#if($column.htmlType == "input")
-      <el-form-item label="${comment}" prop="${column.javaField}">
-        <el-input
-          v-model="queryParams.${column.javaField}"
-          placeholder="请输入${comment}"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-#elseif(($column.htmlType == "select" || $column.htmlType == "radio") && "" != $dictType)
-      <el-form-item label="${comment}" prop="${column.javaField}">
-        <el-select v-model="queryParams.${column.javaField}" placeholder="请选择${comment}" clearable size="small">
-          <el-option
-            v-for="dict in dict.type.${dictType}"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
-        </el-select>
-      </el-form-item>
-#elseif(($column.htmlType == "select" || $column.htmlType == "radio") && $dictType)
-      <el-form-item label="${comment}" prop="${column.javaField}">
-        <el-select v-model="queryParams.${column.javaField}" placeholder="请选择${comment}" clearable size="small">
-          <el-option label="请选择字典生成" value="" />
-        </el-select>
-      </el-form-item>
-#elseif($column.htmlType == "datetime" && $column.queryType != "BETWEEN")
-      <el-form-item label="${comment}" prop="${column.javaField}">
-        <el-date-picker clearable size="small"
-          v-model="queryParams.${column.javaField}"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="选择${comment}">
-        </el-date-picker>
-      </el-form-item>
-#elseif($column.htmlType == "datetime" && $column.queryType == "BETWEEN")
-      <el-form-item label="${comment}">
-        <el-date-picker
-          v-model="daterange${AttrName}"
-          size="small"
-          style="width: 240px"
-          value-format="yyyy-MM-dd"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        ></el-date-picker>
-      </el-form-item>
-#end
-#end
-#end
-      <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
-      </el-form-item>
-    </el-form>
-
-    <el-row :gutter="10" class="mb8">
+    <el-row :gutter="10" class="mb5">
       <el-col :span="1.5">
         <el-button
           type="primary"
@@ -112,10 +43,78 @@
           v-hasPermi="['${moduleName}:${businessName}:export']"
         >导出</el-button>
       </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px" class="el-form-search">
+            #foreach($column in $columns)
+                #if($column.query)
+                    #set($dictType=$column.dictType)
+                    #set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
+                    #set($parentheseIndex=$column.columnComment.indexOf("（"))
+                    #if($parentheseIndex != -1)
+                        #set($comment=$column.columnComment.substring(0, $parentheseIndex))
+                    #else
+                        #set($comment=$column.columnComment)
+                    #end
+                    #if($column.htmlType == "input")
+                        <el-form-item label="${comment}" prop="${column.javaField}" class="el-form-search-item">
+                            <el-input
+                                    v-model="queryParams.${column.javaField}"
+                                    placeholder="请输入${comment}"
+                                    clearable
+                                    size="small"
+                                    @keyup.enter.native="handleQuery"
+                            />
+                        </el-form-item>
+                    #elseif(($column.htmlType == "select" || $column.htmlType == "radio") && "" != $dictType)
+                        <el-form-item label="${comment}" prop="${column.javaField}" class="el-form-search-item">
+                            <el-select v-model="queryParams.${column.javaField}" placeholder="请选择${comment}" clearable size="small">
+                                <el-option
+                                        v-for="dict in dict.type.${dictType}"
+                                        :key="dict.value"
+                                        :label="dict.label"
+                                        :value="dict.value"
+                                />
+                            </el-select>
+                        </el-form-item>
+                    #elseif(($column.htmlType == "select" || $column.htmlType == "radio") && $dictType)
+                        <el-form-item label="${comment}" prop="${column.javaField}" class="el-form-search-item">
+                            <el-select v-model="queryParams.${column.javaField}" placeholder="请选择${comment}" clearable size="small">
+                                <el-option label="请选择字典生成" value="" />
+                            </el-select>
+                        </el-form-item>
+                    #elseif($column.htmlType == "datetime" && $column.queryType != "BETWEEN")
+                        <el-form-item label="${comment}" prop="${column.javaField}" class="el-form-search-item">
+                            <el-date-picker clearable size="small"
+                                            v-model="queryParams.${column.javaField}"
+                                            type="date"
+                                            value-format="yyyy-MM-dd"
+                                            placeholder="选择${comment}">
+                            </el-date-picker>
+                        </el-form-item>
+                    #elseif($column.htmlType == "datetime" && $column.queryType == "BETWEEN")
+                        <el-form-item label="${comment}" class="el-form-search-item">
+                            <el-date-picker
+                                    v-model="daterange${AttrName}"
+                                    size="small"
+                                    style="width: 240px"
+                                    value-format="yyyy-MM-dd"
+                                    type="daterange"
+                                    range-separator="-"
+                                    start-placeholder="开始日期"
+                                    end-placeholder="结束日期"
+                            ></el-date-picker>
+                        </el-form-item>
+                    #end
+                #end
+            #end
+            <el-form-item class="el-form-search-item">
+                <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+                <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+                <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+            </el-form-item>
+        </el-form>
     </el-row>
 
-    <el-table v-loading="loading" :data="${businessName}List" @selection-change="handleSelectionChange">
+    <el-table :height="tableHeight" v-loading="loading" :data="${businessName}List" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
 #foreach($column in $columns)
 #set($javaField=$column.javaField)
@@ -153,7 +152,7 @@
       <el-table-column label="${comment}" align="center" prop="${javaField}" />
 #end
 #end
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="150">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -172,7 +171,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -213,13 +212,12 @@
         </el-form-item>
 #elseif($column.htmlType == "select" && "" != $dictType)
         <el-form-item label="${comment}" prop="${field}">
-          <el-select v-model="form.${field}" placeholder="请选择${comment}">
+          <el-select v-model="form.${field}" placeholder="请选择${comment}" style="width: 100%">
             <el-option
               v-for="dict in dict.type.${dictType}"
               :key="dict.value"
               :label="dict.label"
               #if($column.javaType == "Integer" || $column.javaType == "Long"):value="parseInt(dict.value)"#else:value="dict.value"#end
-
             ></el-option>
           </el-select>
         </el-form-item>
@@ -292,7 +290,6 @@
         </el-row>
         <el-table :data="${subclassName}List" :row-class-name="row${subClassName}Index" @selection-change="handle${subClassName}SelectionChange" ref="${subclassName}">
           <el-table-column type="selection" width="50" align="center" />
-          <el-table-column label="序号" align="center" prop="index" width="50"/>
 #foreach($column in $subTable.columns)
 #set($javaField=$column.javaField)
 #set($parentheseIndex=$column.columnComment.indexOf("（"))
@@ -331,6 +328,8 @@ export default {
 #end
   data() {
     return {
+      // 表格高度
+      tableHeight: document.documentElement.clientHeight - 180,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -367,7 +366,7 @@ export default {
       // 查询参数
       queryParams: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 20,
 #foreach ($column in $columns)
 #if($column.query)
         $column.javaField: null#if($foreach.count != $columns.size()),#end
@@ -522,7 +521,7 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const ${pkColumn.javaField}s = row.${pkColumn.javaField} || this.ids;
-      this.#[[$modal]]#.confirm('是否确认删除${functionName}编号为"' + ${pkColumn.javaField}s + '"的数据项？').then(function() {
+      this.#[[$modal]]#.confirm('是否确认删除记录？').then(function() {
         return del${BusinessName}(${pkColumn.javaField}s);
       }).then(() => {
         this.getList();

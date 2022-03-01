@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.source.system.mapper.CmsArticleMapper">
+    
+    <resultMap type="CmsArticle" id="CmsArticleResult">
+        <result property="id"    column="id"    />
+        <result property="articleType"    column="article_type"    />
+        <result property="smallTitle"    column="small_title"    />
+        <result property="bigTitle"    column="big_title"    />
+        <result property="faceUrl"    column="face_url"    />
+        <result property="faceThum"    column="face_thum"    />
+        <result property="articleContent"    column="article_content"    />
+        <result property="articleSource"    column="article_source"    />
+        <result property="sortNo"    column="sort_no"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectCmsArticleVo">
+        select id, article_type, small_title, big_title, face_url, face_thum, article_content, article_source, sort_no, create_time, create_by, update_time, update_by, remark from cms_article
+    </sql>
+
+    <select id="selectCmsArticleList" parameterType="CmsArticle" resultMap="CmsArticleResult">
+        <include refid="selectCmsArticleVo"/>
+        <where>  
+            <if test="articleType != null  and articleType != ''"> and article_type = #{articleType}</if>
+            <if test="smallTitle != null  and smallTitle != ''"> and small_title = #{smallTitle}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmsArticleById" parameterType="Long" resultMap="CmsArticleResult">
+        <include refid="selectCmsArticleVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmsArticle" parameterType="CmsArticle" useGeneratedKeys="true" keyProperty="id">
+        insert into cms_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="articleType != null and articleType != ''">article_type,</if>
+            <if test="smallTitle != null and smallTitle != ''">small_title,</if>
+            <if test="bigTitle != null">big_title,</if>
+            <if test="faceUrl != null">face_url,</if>
+            <if test="faceThum != null">face_thum,</if>
+            <if test="articleContent != null">article_content,</if>
+            <if test="articleSource != null">article_source,</if>
+            <if test="sortNo != null">sort_no,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="articleType != null and articleType != ''">#{articleType},</if>
+            <if test="smallTitle != null and smallTitle != ''">#{smallTitle},</if>
+            <if test="bigTitle != null">#{bigTitle},</if>
+            <if test="faceUrl != null">#{faceUrl},</if>
+            <if test="faceThum != null">#{faceThum},</if>
+            <if test="articleContent != null">#{articleContent},</if>
+            <if test="articleSource != null">#{articleSource},</if>
+            <if test="sortNo != null">#{sortNo},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmsArticle" parameterType="CmsArticle">
+        update cms_article
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="articleType != null and articleType != ''">article_type = #{articleType},</if>
+            <if test="smallTitle != null and smallTitle != ''">small_title = #{smallTitle},</if>
+            <if test="bigTitle != null">big_title = #{bigTitle},</if>
+            <if test="faceUrl != null">face_url = #{faceUrl},</if>
+            <if test="faceThum != null">face_thum = #{faceThum},</if>
+            <if test="articleContent != null">article_content = #{articleContent},</if>
+            <if test="articleSource != null">article_source = #{articleSource},</if>
+            <if test="sortNo != null">sort_no = #{sortNo},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmsArticleById" parameterType="Long">
+        delete from cms_article where id = #{id}
+    </delete>
+
+    <delete id="deleteCmsArticleByIds" parameterType="String">
+        delete from cms_article where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
