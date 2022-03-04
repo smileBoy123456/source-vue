@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * 内容管理Controller
+ * 文章管理Controller
  *
  * @author 詹Sir
  * @date 2022-03-01
@@ -29,7 +29,7 @@ public class CmsArticleController extends BaseController
     private ICmsArticleService cmsArticleService;
 
     /**
-     * 查询内容管理列表
+     * 查询文章管理列表
      */
     @PreAuthorize("@ss.hasPermi('system:article:list')")
     @GetMapping("/list")
@@ -41,20 +41,20 @@ public class CmsArticleController extends BaseController
     }
 
     /**
-     * 导出内容管理列表
+     * 导出文章管理列表
      */
     @PreAuthorize("@ss.hasPermi('system:article:export')")
-    @Log(title = "内容管理", businessType = BusinessType.EXPORT)
+    @Log(title = "文章管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, CmsArticle cmsArticle)
     {
         List<CmsArticle> list = cmsArticleService.selectCmsArticleList(cmsArticle);
         ExcelUtil<CmsArticle> util = new ExcelUtil<CmsArticle>(CmsArticle.class);
-        util.exportExcel(response, list, "内容管理数据");
+        util.exportExcel(response, list, "文章管理数据");
     }
 
     /**
-     * 获取内容管理详细信息
+     * 获取文章管理详细信息
      */
     @PreAuthorize("@ss.hasPermi('system:article:query')")
     @GetMapping(value = "/{id}")
@@ -64,10 +64,10 @@ public class CmsArticleController extends BaseController
     }
 
     /**
-     * 新增内容管理
+     * 新增文章管理
      */
     @PreAuthorize("@ss.hasPermi('system:article:add')")
-    @Log(title = "内容管理", businessType = BusinessType.INSERT)
+    @Log(title = "文章管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CmsArticle cmsArticle)
     {
@@ -75,10 +75,10 @@ public class CmsArticleController extends BaseController
     }
 
     /**
-     * 修改内容管理
+     * 修改文章管理
      */
     @PreAuthorize("@ss.hasPermi('system:article:edit')")
-    @Log(title = "内容管理", businessType = BusinessType.UPDATE)
+    @Log(title = "文章管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CmsArticle cmsArticle)
     {
@@ -86,10 +86,10 @@ public class CmsArticleController extends BaseController
     }
 
     /**
-     * 删除内容管理
+     * 删除文章管理
      */
     @PreAuthorize("@ss.hasPermi('system:article:remove')")
-    @Log(title = "内容管理", businessType = BusinessType.DELETE)
+    @Log(title = "文章管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {

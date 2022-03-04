@@ -49,6 +49,9 @@ public class CmsArticle extends BaseEntity
     /** 排序号 */
     private Integer sortNo;
 
+    /** 点赞量 */
+    private Integer starNum;
+
     public void setId(Long id)
     {
         this.id = id;
@@ -131,6 +134,14 @@ public class CmsArticle extends BaseEntity
         return sortNo;
     }
 
+    public Integer getStarNum() {
+        return starNum;
+    }
+
+    public void setStarNum(Integer starNum) {
+        this.starNum = starNum;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -143,6 +154,7 @@ public class CmsArticle extends BaseEntity
             .append("articleContent", getArticleContent())
             .append("articleSource", getArticleSource())
             .append("sortNo", getSortNo())
+            .append("starNum", getStarNum())
             .append("createTime", getCreateTime())
             .append("createBy", getCreateBy())
             .append("updateTime", getUpdateTime())

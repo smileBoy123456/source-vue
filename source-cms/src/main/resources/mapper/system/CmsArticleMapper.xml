@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.source.system.mapper.CmsArticleMapper">
-    
+
     <resultMap type="CmsArticle" id="CmsArticleResult">
         <result property="id"    column="id"    />
         <result property="articleType"    column="article_type"    />
@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="articleContent"    column="article_content"    />
         <result property="articleSource"    column="article_source"    />
         <result property="sortNo"    column="sort_no"    />
+        <result property="starNum"    column="star_Num"    />
         <result property="createTime"    column="create_time"    />
         <result property="createBy"    column="create_by"    />
         <result property="updateTime"    column="update_time"    />
@@ -21,23 +22,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
     </resultMap>
 
+
     <sql id="selectCmsArticleVo">
-        select id, article_type, small_title, big_title, face_url, face_thum, article_content, article_source, sort_no, create_time, create_by, update_time, update_by, remark from cms_article
+        select id, article_type, small_title, big_title, face_url, face_thum, article_content, article_source, sort_no, star_Num, create_time, create_by, update_time, update_by, remark from cms_article
     </sql>
 
     <select id="selectCmsArticleList" parameterType="CmsArticle" resultMap="CmsArticleResult">
         <include refid="selectCmsArticleVo"/>
-        <where>  
+        <where>
             <if test="articleType != null  and articleType != ''"> and article_type = #{articleType}</if>
             <if test="smallTitle != null  and smallTitle != ''"> and small_title = #{smallTitle}</if>
         </where>
     </select>
-    
+
     <select id="selectCmsArticleById" parameterType="Long" resultMap="CmsArticleResult">
         <include refid="selectCmsArticleVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertCmsArticle" parameterType="CmsArticle" useGeneratedKeys="true" keyProperty="id">
         insert into cms_article
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -97,9 +99,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteCmsArticleByIds" parameterType="String">
-        delete from cms_article where id in 
+        delete from cms_article where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
+
+    <update id="starCmsArticle" parameterType="CmsArticle">
+        update cms_article SET update_time = #{updateTime},star_num=IFNULL(star_num,0)+1
+        where id = #{id}
+    </update>
 </mapper>

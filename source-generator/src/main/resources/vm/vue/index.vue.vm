@@ -135,7 +135,7 @@
 #elseif($column.list && $column.htmlType == "imageUpload")
       <el-table-column label="${comment}" align="center" prop="${javaField}" width="100">
         <template slot-scope="scope">
-          <image-preview :src="scope.row.${javaField}" :width="50" :height="50"/>
+          <image-preview :src="scope.row.${javaField}" :width="30" :height="30"/>
         </template>
       </el-table-column>
 #elseif($column.list && "" != $column.dictType)
@@ -181,7 +181,7 @@
     />
 
     <!-- 添加或修改${functionName}对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body :close-on-click-modal="false" v-dialogDrag>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
 #foreach($column in $columns)
 #set($field=$column.javaField)
@@ -290,6 +290,13 @@
         </el-row>
         <el-table :data="${subclassName}List" :row-class-name="row${subClassName}Index" @selection-change="handle${subClassName}SelectionChange" ref="${subclassName}">
           <el-table-column type="selection" width="50" align="center" />
+          <el-table-column label="#" type="index" width="50" align="center">
+            <template scope="scope">
+              <span>{{
+                (queryParams.pageNum - 1) * queryParams.pageSize + scope.$index + 1
+              }}</span>
+            </template>
+          </el-table-column>
 #foreach($column in $subTable.columns)
 #set($javaField=$column.javaField)
 #set($parentheseIndex=$column.columnComment.indexOf("（"))

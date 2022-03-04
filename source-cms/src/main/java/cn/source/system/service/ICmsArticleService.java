@@ -59,4 +59,12 @@ public interface ICmsArticleService
      * @return 结果
      */
     public int deleteCmsArticleById(Long id);
+
+    /**
+     * 点赞文章
+     *
+     * @param cmsArticle 内容管理
+     * @return 结果
+     */
+    public int starCmsArticle(CmsArticle cmsArticle);
 }

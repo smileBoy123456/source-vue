@@ -94,4 +94,14 @@ public class CmsArticleServiceImpl implements ICmsArticleService
     {
         return cmsArticleMapper.deleteCmsArticleById(id);
     }
+
+    /**
+    * @author: zy
+    * @date: 点赞
+    */
+    @Override
+    public int starCmsArticle(CmsArticle cmsArticle) {
+        cmsArticle.setUpdateTime(DateUtils.getNowDate());
+        return cmsArticleMapper.starCmsArticle(cmsArticle);
+    }
 }

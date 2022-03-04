@@ -1,11 +1,14 @@
 package cn.source.system.controller;
 
+import cn.source.common.core.controller.BaseController;
+import cn.source.common.core.domain.AjaxResult;
+import cn.source.common.core.page.TableDataInfo;
+import cn.source.system.domain.CmsArticle;
 import cn.source.system.domain.CmsServiceItem;
+import cn.source.system.service.ICmsArticleService;
 import cn.source.system.service.ICmsServiceItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,10 +18,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/cmsApi")
-public class CmsApiController {
+public class CmsApiController extends BaseController {
 
     @Autowired
     private ICmsServiceItemService cmsServiceItemService;
+
+    @Autowired
+    private ICmsArticleService cmsArticleService;
 
     /**
      * 根据类型获取服务内容
@@ -32,4 +38,36 @@ public class CmsApiController {
         }
         return null;
     }
+
+    /**
+     * @Description: 获取文章列表
+     * @author: zy
+     */
+    @GetMapping("/findArticlelist")
+    public TableDataInfo findArticlelist(CmsArticle cmsArticle)
+    {
+        startPage();
+        List<CmsArticle> list = cmsArticleService.selectCmsArticleList(cmsArticle);
+        return getDataTable(list);
+    }
+
+    /**
+     * 获取文章详细信息
+     */
+    @GetMapping(value = "/getArticle/{id}")
+    public AjaxResult getArticle(@PathVariable("id") Long id)
+    {
+        return AjaxResult.success(cmsArticleService.selectCmsArticleById(id));
+    }
+
+    /**
+    * @Description: 点赞
+    * @author: zy
+    */
+    @PostMapping("/starArticle")
+    public AjaxResult starArticle(@RequestBody CmsArticle cmsArticle)
+    {
+        return toAjax(cmsArticleService.starCmsArticle(cmsArticle));
+    }
+
 }
