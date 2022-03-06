@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectCmsArticleVo"/>
         <where>
             <if test="articleType != null  and articleType != ''"> and article_type = #{articleType}</if>
-            <if test="smallTitle != null  and smallTitle != ''"> and small_title = #{smallTitle}</if>
+            <if test="smallTitle != null  and smallTitle != ''"> and small_title like CONCAT('%',#{smallTitle},'%')</if>
         </where>
     </select>
 

@@ -43,8 +43,8 @@ public class CmsApiController extends BaseController {
      * @Description: 获取文章列表
      * @author: zy
      */
-    @GetMapping("/findArticlelist")
-    public TableDataInfo findArticlelist(CmsArticle cmsArticle)
+    @GetMapping("/findArticleList")
+    public TableDataInfo findArticleList(CmsArticle cmsArticle)
     {
         startPage();
         List<CmsArticle> list = cmsArticleService.selectCmsArticleList(cmsArticle);
@@ -65,7 +65,7 @@ public class CmsApiController extends BaseController {
     * @author: zy
     */
     @PostMapping("/starArticle")
-    public AjaxResult starArticle(@RequestBody CmsArticle cmsArticle)
+    public AjaxResult starArticle(CmsArticle cmsArticle)
     {
         return toAjax(cmsArticleService.starCmsArticle(cmsArticle));
     }
