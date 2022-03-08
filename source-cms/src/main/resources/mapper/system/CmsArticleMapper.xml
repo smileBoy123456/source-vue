@@ -84,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="faceThum != null">face_thum = #{faceThum},</if>
             <if test="articleContent != null">article_content = #{articleContent},</if>
             <if test="articleSource != null">article_source = #{articleSource},</if>
-            <if test="sortNo != null">sort_no = #{sortNo},</if>
+            sort_no = #{sortNo},
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
