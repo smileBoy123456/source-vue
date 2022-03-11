@@ -1,5 +1,5 @@
 <p align="center">
-	<img alt="logo" src="http://8.136.213.245/assets/logo_c_64.5eb3acc5.png">
+	<img alt="logo" src="https://sourcebyte.cn/assets/logo_c_64.5eb3acc5.png">
 </p>
 <h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">Source-Vue v1.0.0</h1>
 <h4 align="center">基于SpringBoot+Vue前后端分离的Java快速开发框架</h4>
@@ -7,7 +7,7 @@
 
 ## 平台简介
 
-开源字节是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。
+开源字节是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。拒绝虚假开源，售卖商业版，程序员不骗程序员！！
 
 * PC端采用Vue、Element UI。
 * 后端采用Spring Boot、Mybatis-Plus、Spring Security、Redis & Jwt。
@@ -50,6 +50,12 @@
 16. 缓存监控：对系统的缓存信息查询，命令统计等。
 17. 在线构建器：拖动表单元素生成相应的HTML代码。
 18. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
+
+###在线体验
+
+演示地址：https://sourcebyte.cn
+
+文档地址：https://sourcebyte.cn
 
 #### 交流群
 
