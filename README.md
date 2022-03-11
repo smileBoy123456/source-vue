@@ -14,7 +14,9 @@
 * 移动端采用Vue、Uniapp、Uview。
 * 工作流使用Flowable、Bpmn.io。
 * 即时通讯使用T-io。
-* 表格解决方案使用Vxe-table。
+* 类Excel拖拽赋值的Web数据录入 CanEditGrid。
+* 企业级Web报表工具 IReport
+* 单行编辑解决方案使用Vxe-table。
 * 可视化大屏数据展示使用DataV。
 * 权限认证使用Jwt，支持多终端认证系统。
 * 支持加载动态权限菜单，多方式轻松权限控制。
