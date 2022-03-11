@@ -10,7 +10,7 @@
 开源字节是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。拒绝虚假开源，售卖商业版，程序员不骗程序员！！
 
 * PC端采用Vue、Element UI。
-* 后端采用Spring Boot、Mybatis-Plus、Spring Security、Redis & Jwt。
+* 后端采用Spring Boot、Mybatis、Spring Security、Redis & Jwt。
 * 移动端采用Vue、Uniapp、Uview。
 * 工作流使用Flowable、Bpmn.io。
 * 即时通讯使用T-io。
