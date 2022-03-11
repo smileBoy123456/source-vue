@@ -22,15 +22,15 @@
 * 支持加载动态权限菜单，多方式轻松权限控制。
 * 高效率开发，使用代码生成器可以一键生成前后端代码。
 
-## 内置业务功能
+## 内置业务功能 
 1.  [CMS内容管理](https://sourcebyte.cn)
-2.  智慧租房
-3.  智慧党建
-4.  智慧相亲
-5.  智慧电商
-6.  智慧仓储
-7.  智慧医疗
-8.  智慧家装
+2.  [智慧租房](http://8.136.213.245:8080/h5)
+3.  [智慧党建](http://8.141.150.22)
+4.  [智慧相亲](https://sourcebyte.cn)
+5.  [智慧电商](https://sourcebyte.cn)
+6.  [智慧仓储](https://sourcebyte.cn)
+7.  [智慧医疗](https://sourcebyte.cn)
+8.  [智慧家装](https://sourcebyte.cn)
 9.  [更多精彩内容](https://sourcebyte.cn)
 
 ## 内置系统功能
