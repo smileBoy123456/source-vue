@@ -3,13 +3,17 @@ package cn.source.system.controller;
 import cn.source.common.core.controller.BaseController;
 import cn.source.common.core.domain.AjaxResult;
 import cn.source.common.core.page.TableDataInfo;
+import cn.source.common.utils.ip.IpUtils;
 import cn.source.system.domain.CmsArticle;
+import cn.source.system.domain.CmsFeedback;
 import cn.source.system.domain.CmsServiceItem;
 import cn.source.system.service.ICmsArticleService;
+import cn.source.system.service.ICmsFeedbackService;
 import cn.source.system.service.ICmsServiceItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -25,6 +29,9 @@ public class CmsApiController extends BaseController {
 
     @Autowired
     private ICmsArticleService cmsArticleService;
+
+    @Autowired
+    private ICmsFeedbackService cmsFeedbackService;
 
     /**
      * 根据类型获取服务内容
@@ -68,6 +75,17 @@ public class CmsApiController extends BaseController {
     public AjaxResult starArticle(CmsArticle cmsArticle)
     {
         return toAjax(cmsArticleService.starCmsArticle(cmsArticle));
+    }
+
+    /**
+     * @Description: 反馈
+     * @author: zy
+     */
+    @PostMapping("/saveCmsFeedback")
+    public AjaxResult saveCmsFeedback(HttpServletRequest request,CmsFeedback cmsFeedback)
+    {
+        cmsFeedback.setRemark(IpUtils.getIpAddr(request));
+        return toAjax(cmsFeedbackService.insertCmsFeedback(cmsFeedback));
     }
 
 }
