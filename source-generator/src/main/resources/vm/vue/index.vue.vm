@@ -116,6 +116,13 @@
 
     <el-table :height="tableHeight" v-loading="loading" :data="${businessName}List" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
+        <el-table-column label="#" type="index" width="50" align="center">
+            <template scope="scope">
+          <span>{{
+            (queryParams.pageNum - 1) * queryParams.pageSize + scope.$index + 1
+          }}</span>
+            </template>
+        </el-table-column>
 #foreach($column in $columns)
 #set($javaField=$column.javaField)
 #set($parentheseIndex=$column.columnComment.indexOf("（"))

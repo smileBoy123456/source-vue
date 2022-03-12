@@ -6,9 +6,11 @@ import cn.source.common.core.page.TableDataInfo;
 import cn.source.common.utils.ip.IpUtils;
 import cn.source.system.domain.CmsArticle;
 import cn.source.system.domain.CmsFeedback;
+import cn.source.system.domain.CmsLink;
 import cn.source.system.domain.CmsServiceItem;
 import cn.source.system.service.ICmsArticleService;
 import cn.source.system.service.ICmsFeedbackService;
+import cn.source.system.service.ICmsLinkService;
 import cn.source.system.service.ICmsServiceItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,9 +35,11 @@ public class CmsApiController extends BaseController {
     @Autowired
     private ICmsFeedbackService cmsFeedbackService;
 
+    @Autowired
+    private ICmsLinkService cmsLinkService;
+
     /**
      * 根据类型获取服务内容
-     * @return
      */
     @GetMapping("/getServiceItem")
     public CmsServiceItem getServiceItmeByType(CmsServiceItem cmsServiceItem){
@@ -48,7 +52,6 @@ public class CmsApiController extends BaseController {
 
     /**
      * @Description: 获取文章列表
-     * @author: zy
      */
     @GetMapping("/findArticleList")
     public TableDataInfo findArticleList(CmsArticle cmsArticle)
@@ -69,7 +72,6 @@ public class CmsApiController extends BaseController {
 
     /**
     * @Description: 点赞
-    * @author: zy
     */
     @PostMapping("/starArticle")
     public AjaxResult starArticle(CmsArticle cmsArticle)
@@ -79,13 +81,32 @@ public class CmsApiController extends BaseController {
 
     /**
      * @Description: 反馈
-     * @author: zy
      */
     @PostMapping("/saveCmsFeedback")
     public AjaxResult saveCmsFeedback(HttpServletRequest request,CmsFeedback cmsFeedback)
     {
-        cmsFeedback.setRemark(IpUtils.getIpAddr(request));
+        cmsFeedback.setCreateBy(IpUtils.getIpAddr(request));
         return toAjax(cmsFeedbackService.insertCmsFeedback(cmsFeedback));
     }
 
+    /**
+     * @Description: 申请友链
+     */
+    @PostMapping("/submitLink")
+    public AjaxResult submitLink(HttpServletRequest request,CmsLink cmsLink)
+    {
+        cmsLink.setCreateBy(IpUtils.getIpAddr(request));
+        return toAjax(cmsLinkService.insertCmsLink(cmsLink));
+    }
+
+    /**
+     * @Description: 获取友链列表
+     */
+    @GetMapping("/findLinkList")
+    public TableDataInfo findLinkList(CmsLink cmsLink)
+    {
+        startPage();
+        List<CmsLink> list = cmsLinkService.selectCmsLinkList(cmsLink);
+        return getDataTable(list);
+    }
 }
