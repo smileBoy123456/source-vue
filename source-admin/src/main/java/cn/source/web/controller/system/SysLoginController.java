@@ -1,12 +1,5 @@
 package cn.source.web.controller.system;
 
-import java.util.List;
-import java.util.Set;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 import cn.source.common.constant.Constants;
 import cn.source.common.core.domain.AjaxResult;
 import cn.source.common.core.domain.entity.SysMenu;
@@ -16,10 +9,18 @@ import cn.source.common.utils.SecurityUtils;
 import cn.source.framework.web.service.SysLoginService;
 import cn.source.framework.web.service.SysPermissionService;
 import cn.source.system.service.ISysMenuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * 登录验证
- * 
+ *
  * @author ruoyi
  */
 @RestController
@@ -36,7 +37,7 @@ public class SysLoginController
 
     /**
      * 登录方法
-     * 
+     *
      * @param loginBody 登录信息
      * @return 结果
      */
@@ -53,7 +54,7 @@ public class SysLoginController
 
     /**
      * 获取用户信息
-     * 
+     *
      * @return 用户信息
      */
     @GetMapping("getInfo")
@@ -73,7 +74,7 @@ public class SysLoginController
 
     /**
      * 获取路由信息
-     * 
+     *
      * @return 路由信息
      */
     @GetMapping("getRouters")
