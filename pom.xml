@@ -9,7 +9,7 @@
     <version>3.8.1</version>
 
     <name>source</name>
-    <url>http://8.136.213.245/index</url>
+    <url>https://sourcebyte.cn</url>
     <description>开源字节</description>
 
     <properties>
@@ -220,6 +220,34 @@
                 <version>${source.version}</version>
             </dependency>
 
+            <!-- house模块-->
+            <dependency>
+                <groupId>cn.source</groupId>
+                <artifactId>source-house</artifactId>
+                <version>${source.version}</version>
+            </dependency>
+
+            <!-- im模块-->
+            <dependency>
+                <groupId>cn.source</groupId>
+                <artifactId>source-im</artifactId>
+                <version>${source.version}</version>
+            </dependency>
+
+            <!-- flow模块-->
+            <dependency>
+                <groupId>cn.source</groupId>
+                <artifactId>source-flow</artifactId>
+                <version>${source.version}</version>
+            </dependency>
+
+            <!-- wms模块-->
+            <dependency>
+                <groupId>cn.source</groupId>
+                <artifactId>source-wms</artifactId>
+                <version>${source.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
@@ -239,6 +267,8 @@
         <module>source-im</module>
         <!--新增工作流模块-->
         <module>source-flow</module>
+        <!--wms-->
+        <module>source-wms</module>
     </modules>
     <packaging>pom</packaging>
 

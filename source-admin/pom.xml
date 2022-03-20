@@ -98,6 +98,11 @@
             <artifactId>source-flow</artifactId>
         </dependency>
 
+        <!-- wms-->
+        <dependency>
+            <groupId>cn.source</groupId>
+            <artifactId>source-wms</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
