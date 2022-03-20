@@ -233,9 +233,12 @@
         <module>source-common</module>
         <!--新增CMS模块-->
         <module>source-cms</module>
-        <!--新增SCRM模块-->
-        <!--新增工作流模块-->
+        <!--新增租房模块-->
+        <module>source-house</module>
         <!--新增IM模块-->
+        <module>source-im</module>
+        <!--新增工作流模块-->
+        <module>source-flow</module>
     </modules>
     <packaging>pom</packaging>
 
