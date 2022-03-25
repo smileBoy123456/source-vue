@@ -84,8 +84,16 @@ public class ThirdLoginController extends BaseController
             sysUser.setPassword(loginBody.getPassword());
             sysUser.setPhonenumber(loginBody.getUsername());
             sysUser.setPassword(SecurityUtils.encryptPassword(loginBody.getUsername()));
-            userService.registerUser(sysUser);
-        //  保存完用户后，还需要设置用户的角色，部门与岗位
+            sysUser.setDeptId(110L);
+            Long[] postIds = new Long[1];
+            postIds[0] = 8L;
+            Long[] roleIds = new Long[1];
+            roleIds[0] = 5L;
+            sysUser.setPostIds(postIds);
+            sysUser.setRoleIds(roleIds);
+            //  保存完用户后，还需要设置用户的角色，部门与岗位
+            // userService.registerUser(sysUser);
+            userService.insertUser(sysUser);
         }
         // 生成token
         LoginUser loginUser = new LoginUser(sysUser,null);

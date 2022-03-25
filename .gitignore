@@ -45,3 +45,4 @@ nbdist/
 source-admin/src/main/resources/application-druid.yml
 source-admin/src/main/resources/application.yml
 /source-admin/src/main/resources/application.yml
+/source-admin/src/main/resources/application.yml

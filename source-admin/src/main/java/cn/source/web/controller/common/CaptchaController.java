@@ -5,6 +5,7 @@ import cn.source.common.constant.Constants;
 import cn.source.common.core.domain.AjaxResult;
 import cn.source.common.core.redis.RedisCache;
 import cn.source.common.utils.sign.Base64;
+import cn.source.common.utils.sms.DySmsUtil;
 import cn.source.common.utils.uuid.CodeUtil;
 import cn.source.common.utils.uuid.IdUtils;
 import cn.source.system.service.ISysConfigService;
@@ -123,9 +124,9 @@ public class CaptchaController
             redisCache.setCacheObject(loginName, code , 10,TimeUnit.MINUTES);
             JSONObject obj = new JSONObject();
             obj.put("code", code);
-            logger.info(code);
+            // logger.info(code);
             // 云信短信
-            // DySmsUtil.sendSms(loginName, obj,accessKeyId,accessKeySecret,accessKeytemplate);
+            DySmsUtil.sendSms(loginName, obj,accessKeyId,accessKeySecret,accessKeytemplate);
             return true;
         }else{
             return false;
