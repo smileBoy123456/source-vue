@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.source.system.mapper.HouseFeatureMapper">
+    
+    <resultMap type="HouseFeature" id="HouseFeatureResult">
+        <result property="id"    column="id"    />
+        <result property="houseId"    column="house_id"    />
+        <result property="feature"    column="feature"    />
+    </resultMap>
+
+    <sql id="selectHouseFeatureVo">
+        select id, house_id, feature from house_feature
+    </sql>
+
+    <select id="selectHouseFeatureList" parameterType="HouseFeature" resultMap="HouseFeatureResult">
+        <include refid="selectHouseFeatureVo"/>
+        <where>  
+            <if test="houseId != null "> and house_id = #{houseId}</if>
+            <if test="feature != null  and feature != ''"> and feature = #{feature}</if>
+        </where>
+    </select>
+    
+    <select id="selectHouseFeatureById" parameterType="Long" resultMap="HouseFeatureResult">
+        <include refid="selectHouseFeatureVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHouseFeature" parameterType="HouseFeature" useGeneratedKeys="true" keyProperty="id">
+        insert into house_feature
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="houseId != null">house_id,</if>
+            <if test="feature != null">feature,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="houseId != null">#{houseId},</if>
+            <if test="feature != null">#{feature},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHouseFeature" parameterType="HouseFeature">
+        update house_feature
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="houseId != null">house_id = #{houseId},</if>
+            <if test="feature != null">feature = #{feature},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHouseFeatureById" parameterType="Long">
+        delete from house_feature where id = #{id}
+    </delete>
+
+    <delete id="deleteHouseFeatureByIds" parameterType="String">
+        delete from house_feature where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

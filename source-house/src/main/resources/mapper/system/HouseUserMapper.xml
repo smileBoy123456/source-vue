@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.source.system.mapper.HouseUserMapper">
+    
+    <resultMap type="HouseUser" id="HouseUserResult">
+        <result property="id"    column="id"    />
+        <result property="houseId"    column="house_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="publishId"    column="publish_id"    />
+        <result property="actualPrice"    column="actual_price"    />
+        <result property="state"    column="state"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectHouseUserVo">
+        select id, house_id, user_id, publish_id, actual_price, state, create_time, create_by, update_time, update_by, remark from house_user
+    </sql>
+
+    <select id="selectHouseUserList" parameterType="HouseUser" resultMap="HouseUserResult">
+        <include refid="selectHouseUserVo"/>
+        <where>  
+            <if test="houseId != null "> and house_id = #{houseId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="publishId != null "> and publish_id = #{publishId}</if>
+            <if test="actualPrice != null "> and actual_price = #{actualPrice}</if>
+            <if test="state != null "> and state = #{state}</if>
+        </where>
+    </select>
+    
+    <select id="selectHouseUserById" parameterType="Long" resultMap="HouseUserResult">
+        <include refid="selectHouseUserVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHouseUser" parameterType="HouseUser">
+        insert into house_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="houseId != null">house_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="publishId != null">publish_id,</if>
+            <if test="actualPrice != null">actual_price,</if>
+            <if test="state != null">state,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="houseId != null">#{houseId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="publishId != null">#{publishId},</if>
+            <if test="actualPrice != null">#{actualPrice},</if>
+            <if test="state != null">#{state},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHouseUser" parameterType="HouseUser">
+        update house_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="houseId != null">house_id = #{houseId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="publishId != null">publish_id = #{publishId},</if>
+            <if test="actualPrice != null">actual_price = #{actualPrice},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHouseUserById" parameterType="Long">
+        delete from house_user where id = #{id}
+    </delete>
+
+    <delete id="deleteHouseUserByIds" parameterType="String">
+        delete from house_user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

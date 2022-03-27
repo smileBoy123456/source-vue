@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.source.system.mapper.HouseImageMapper">
+    
+    <resultMap type="HouseImage" id="HouseImageResult">
+        <result property="id"    column="id"    />
+        <result property="houseId"    column="house_id"    />
+        <result property="imageName"    column="image_name"    />
+        <result property="imagePath"    column="image_path"    />
+        <result property="imgUrl"    column="img_url"    />
+        <result property="imageSize"    column="image_size"    />
+    </resultMap>
+
+    <sql id="selectHouseImageVo">
+        select id, house_id, image_name, image_path, img_url, image_size from house_image
+    </sql>
+
+    <select id="selectHouseImageList" parameterType="HouseImage" resultMap="HouseImageResult">
+        <include refid="selectHouseImageVo"/>
+        <where>  
+            <if test="houseId != null "> and house_id = #{houseId}</if>
+            <if test="imageName != null  and imageName != ''"> and image_name like concat('%', #{imageName}, '%')</if>
+            <if test="imagePath != null  and imagePath != ''"> and image_path = #{imagePath}</if>
+            <if test="imgUrl != null  and imgUrl != ''"> and img_url = #{imgUrl}</if>
+            <if test="imageSize != null "> and image_size = #{imageSize}</if>
+        </where>
+    </select>
+    
+    <select id="selectHouseImageById" parameterType="Long" resultMap="HouseImageResult">
+        <include refid="selectHouseImageVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHouseImage" parameterType="HouseImage" useGeneratedKeys="true" keyProperty="id">
+        insert into house_image
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="houseId != null">house_id,</if>
+            <if test="imageName != null">image_name,</if>
+            <if test="imagePath != null">image_path,</if>
+            <if test="imgUrl != null">img_url,</if>
+            <if test="imageSize != null">image_size,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="houseId != null">#{houseId},</if>
+            <if test="imageName != null">#{imageName},</if>
+            <if test="imagePath != null">#{imagePath},</if>
+            <if test="imgUrl != null">#{imgUrl},</if>
+            <if test="imageSize != null">#{imageSize},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHouseImage" parameterType="HouseImage">
+        update house_image
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="houseId != null">house_id = #{houseId},</if>
+            <if test="imageName != null">image_name = #{imageName},</if>
+            <if test="imagePath != null">image_path = #{imagePath},</if>
+            <if test="imgUrl != null">img_url = #{imgUrl},</if>
+            <if test="imageSize != null">image_size = #{imageSize},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHouseImageById" parameterType="Long">
+        delete from house_image where id = #{id}
+    </delete>
+
+    <delete id="deleteHouseImageByIds" parameterType="String">
+        delete from house_image where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
