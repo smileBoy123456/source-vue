@@ -58,7 +58,9 @@
 
 演示地址：http://47.243.114.191:8081
 
-文档地址：https://sourcebyte.cn
+官网地址：https://sourcebyte.cn
+
+项目运行文档：https://www.yuque.com/docs/share/8814f4ae-991e-4f1f-bb98-7e4636b28eea?#
 
 ### 番外篇
 
