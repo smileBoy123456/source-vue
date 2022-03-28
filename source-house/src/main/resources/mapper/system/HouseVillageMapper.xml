@@ -145,4 +145,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <select id="selectHouseVillage" parameterType="HouseVillage" resultMap="HouseVillageResult">
+        <include refid="selectHouseVillageVo"/>
+        <where>
+            <if test="name != null  and name != ''"> and name = #{name}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+        </where>
+    </select>
 </mapper>

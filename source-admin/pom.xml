@@ -103,6 +103,12 @@
             <groupId>cn.source</groupId>
             <artifactId>source-wms</artifactId>
         </dependency>
+
+        <!-- 相亲-->
+        <dependency>
+            <groupId>cn.source</groupId>
+            <artifactId>source-love</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -9,10 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>source-house</artifactId>
+    <artifactId>source-love</artifactId>
+
 
     <description>
-        租房管理
+        相亲平台
     </description>
 
     <dependencies>
@@ -22,12 +23,6 @@
             <groupId>cn.source</groupId>
             <artifactId>source-common</artifactId>
         </dependency>
-        <dependency>
-            <groupId>cn.source</groupId>
-            <artifactId>source-system</artifactId>
-        </dependency>
 
     </dependencies>
-
-
 </project>

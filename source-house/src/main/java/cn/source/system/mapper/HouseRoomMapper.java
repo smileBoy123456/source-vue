@@ -1,5 +1,7 @@
 package cn.source.system.mapper;
 
+import cn.source.system.domain.HouseFeature;
+import cn.source.system.domain.HouseImage;
 import cn.source.system.domain.HouseRoom;
 
 import java.util.List;
@@ -59,4 +61,36 @@ public interface HouseRoomMapper
      * @return 结果
      */
     public int deleteHouseRoomByIds(Long[] ids);
+
+    /**
+     * 新增房源图片
+     *
+     * @param houseRoom 房源详情
+     * @return 结果
+     */
+    public int insertHouseImage(HouseRoom houseRoom);
+
+    /**
+     * 新增房源特色
+     *
+     * @param houseRoom 房源详情
+     * @return 结果
+     */
+    public int insertHouseFeature(HouseRoom houseRoom);
+
+    /**
+     * 查询房源图片详情
+     *
+     * @param houseRoom 房源详情
+     * @return 房源详情
+     */
+    public List<HouseImage> selectHouseImage(HouseRoom houseRoom);
+
+    /**
+     * 查询房源亮点详情
+     *
+     * @param houseRoom 房源详情
+     * @return 房源详情
+     */
+    public List<HouseFeature> selectHouseFeature(HouseRoom houseRoom);
 }

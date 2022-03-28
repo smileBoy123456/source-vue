@@ -59,4 +59,12 @@ public interface HouseVillageMapper
      * @return 结果
      */
     public int deleteHouseVillageByIds(Long[] ids);
+
+    /**
+     * 查询房源小区
+     *
+     * @param houseVillage 房源小区
+     * @return 房源小区集合
+     */
+    public HouseVillage selectHouseVillage(HouseVillage houseVillage);
 }

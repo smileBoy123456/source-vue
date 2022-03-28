@@ -94,4 +94,16 @@ public class HouseVillageServiceImpl implements IHouseVillageService
     {
         return houseVillageMapper.deleteHouseVillageById(id);
     }
+
+    /**
+     * 查询房源小区
+     *
+     * @param houseVillage 房源小区
+     * @return 房源小区
+     */
+    @Override
+    public HouseVillage selectHouseVillage(HouseVillage houseVillage)
+    {
+        return houseVillageMapper.selectHouseVillage(houseVillage);
+    }
 }

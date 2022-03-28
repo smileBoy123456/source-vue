@@ -59,4 +59,12 @@ public interface IHouseVillageService
      * @return 结果
      */
     public int deleteHouseVillageById(Long id);
+
+    /**
+     * 通过小区名称查询房源小区
+     *
+     * @param houseVillage 房源小区
+     * @return 房源小区集合
+     */
+    public HouseVillage selectHouseVillage(HouseVillage houseVillage);
 }

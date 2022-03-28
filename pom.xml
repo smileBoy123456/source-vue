@@ -248,6 +248,13 @@
                 <version>${source.version}</version>
             </dependency>
 
+            <!-- 相亲模块-->
+            <dependency>
+                <groupId>cn.source</groupId>
+                <artifactId>source-love</artifactId>
+                <version>${source.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
@@ -269,6 +276,7 @@
         <module>source-flow</module>
         <!--wms-->
         <module>source-wms</module>
+        <module>source-love</module>
     </modules>
     <packaging>pom</packaging>
 

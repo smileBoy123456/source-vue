@@ -59,4 +59,20 @@ public interface IHouseRoomService
      * @return 结果
      */
     public int deleteHouseRoomById(Long id);
+
+    /**
+     * api新增房源详情
+     *
+     * @param houseRoom 房源详情
+     * @return 结果
+     */
+    public int apiInsertHouseRoom(HouseRoom houseRoom);
+
+    /**
+     * 查询房源相关详情信息
+     *
+     * @param houseRoom 房源
+     * @return 房源详情
+     */
+    public HouseRoom selectDetailHouseRoom(HouseRoom houseRoom);
 }

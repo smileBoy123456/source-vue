@@ -2,12 +2,14 @@ package cn.source.system.domain;
 
 import cn.source.common.annotation.Excel;
 import cn.source.common.core.domain.BaseEntity;
+import cn.source.common.core.domain.entity.SysUser;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 房源详情对象 house_room
@@ -120,6 +122,47 @@ public class HouseRoom extends BaseEntity
     private String code;
 
     private String faceUrl;
+
+    private List<HouseImage> imageList;
+
+    private List<HouseFeature> featureList;
+
+    private HouseVillage village;
+
+    private SysUser user;
+
+    public HouseVillage getVillage() {
+        return village;
+    }
+
+    public void setVillage(HouseVillage village) {
+        this.village = village;
+    }
+
+    public SysUser getUser() {
+        return user;
+    }
+
+    public void setUser(SysUser user) {
+        this.user = user;
+    }
+
+    public List<HouseFeature> getFeatureList() {
+        return featureList;
+    }
+
+    public void setFeatureList(List<HouseFeature> featureList) {
+        this.featureList = featureList;
+    }
+
+    public List<HouseImage> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<HouseImage> imageList) {
+        this.imageList = imageList;
+    }
+
 
     public void setId(Long id)
     {

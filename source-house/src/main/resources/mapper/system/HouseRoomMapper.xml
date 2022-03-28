@@ -38,6 +38,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="faceUrl"    column="face_Url"    />
     </resultMap>
 
+    <resultMap type="HouseImage" id="HouseImageResult">
+        <result property="id"    column="id"    />
+        <result property="imageName"    column="image_Name"    />
+        <result property="imagePath"    column="image_Path"    />
+        <result property="imgUrl"    column="img_Url"    />
+        <result property="imageSize"    column="image_Size"    />
+    </resultMap>
+
+    <resultMap type="HouseFeature" id="HouseFeatureResult">
+        <result property="id"    column="id"    />
+        <result property="feature"    column="feature"    />
+    </resultMap>
+
     <sql id="selectHouseRoomVo">
         select id, type, house_Hall,house_num,concat(house_Hall,house_num,toilet_num) as houseCode,toilet_num, house_area, room_type, room_code, room_area, direction, price, floor, step_type, start_date, introduce, owner_name, ower_phone, village_id, village_name, address, house_no, pay_type, publish_id, state, create_time, create_name, update_time, update_name, remark, code, face_Url from house_room
     </sql>
@@ -195,4 +208,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <insert id="insertHouseImage" parameterType="HouseRoom">
+        insert into house_image(house_id,image_name,image_path,img_url,image_size) VALUES
+        <foreach collection ="imageList" item="houseImage" separator =",">
+            (#{id}, #{houseImage.imageName}, #{houseImage.imagePath}, #{houseImage.imgUrl}, #{houseImage.imageSize})
+        </foreach >
+    </insert>
+
+
+    <insert id="insertHouseFeature" parameterType="HouseRoom">
+        insert into house_feature(house_id,feature) VALUES
+        <foreach collection ="featureList" item="houseFeature" separator =",">
+            (#{id}, #{houseFeature.feature})
+        </foreach >
+    </insert>
+
+    <select id="selectHouseImage" parameterType="HouseRoom" resultMap="HouseImageResult">
+        select * from house_image
+        <where>
+            and house_id = #{id}
+        </where>
+    </select>
+
+
+    <select id="selectHouseFeature" parameterType="HouseRoom" resultMap="HouseFeatureResult">
+        select * from house_feature
+        <where>
+            and house_id = #{id}
+        </where>
+    </select>
 </mapper>

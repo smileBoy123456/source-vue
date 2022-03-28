@@ -1,7 +1,12 @@
 package cn.source.web.controller.common;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import cn.source.common.config.RuoYiConfig;
+import cn.source.common.constant.Constants;
+import cn.source.common.core.domain.AjaxResult;
+import cn.source.common.utils.StringUtils;
+import cn.source.common.utils.file.FileUploadUtils;
+import cn.source.common.utils.file.FileUtils;
+import cn.source.framework.config.ServerConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +15,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import cn.source.common.config.RuoYiConfig;
-import cn.source.common.constant.Constants;
-import cn.source.common.core.domain.AjaxResult;
-import cn.source.common.utils.StringUtils;
-import cn.source.common.utils.file.FileUploadUtils;
-import cn.source.common.utils.file.FileUtils;
-import cn.source.framework.config.ServerConfig;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 通用请求处理
- * 
+ *
  * @author ruoyi
  */
 @RestController
@@ -33,7 +34,7 @@ public class CommonController
 
     /**
      * 通用下载请求
-     * 
+     *
      * @param fileName 文件名称
      * @param delete 是否删除
      */
@@ -71,6 +72,8 @@ public class CommonController
     {
         try
         {
+            // 真实文件名
+            String realName = file.getOriginalFilename();
             // 上传文件路径
             String filePath = RuoYiConfig.getUploadPath();
             // 上传并返回新文件名称
@@ -78,6 +81,7 @@ public class CommonController
             String url = serverConfig.getUrl() + fileName;
             AjaxResult ajax = AjaxResult.success();
             ajax.put("fileName", fileName);
+            ajax.put("realName", realName);
             ajax.put("url", url);
             return ajax;
         }
