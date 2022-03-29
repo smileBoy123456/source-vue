@@ -6,10 +6,9 @@ import cn.source.common.core.domain.AjaxResult;
 import cn.source.common.utils.StringUtils;
 import cn.source.common.utils.file.FileUploadUtils;
 import cn.source.common.utils.file.FileUtils;
-import cn.source.framework.config.ServerConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,8 +28,11 @@ public class CommonController
 {
     private static final Logger log = LoggerFactory.getLogger(CommonController.class);
 
-    @Autowired
-    private ServerConfig serverConfig;
+    @Value("${ruoyi.domain}")
+    private  String domain;
+
+    // @Autowired
+    // private ServerConfig serverConfig;
 
     /**
      * 通用下载请求
@@ -78,7 +80,8 @@ public class CommonController
             String filePath = RuoYiConfig.getUploadPath();
             // 上传并返回新文件名称
             String fileName = FileUploadUtils.upload(filePath, file);
-            String url = serverConfig.getUrl() + fileName;
+            // String url = serverConfig.getUrl() + fileName;
+            String url = domain + fileName;
             AjaxResult ajax = AjaxResult.success();
             ajax.put("fileName", fileName);
             ajax.put("realName", realName);
