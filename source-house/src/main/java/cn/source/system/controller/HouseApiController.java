@@ -66,7 +66,6 @@ public class HouseApiController extends BaseController {
      * @Description: 获取房源信息by id
      */
     @GetMapping("/findHouseById")
-    @ResponseBody
     public AjaxResult findHouseById(@RequestParam Long id)
     {
         String msg = "房源查找成功";
