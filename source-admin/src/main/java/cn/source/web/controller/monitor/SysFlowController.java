@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 系统访问流量
@@ -26,6 +27,9 @@ public class SysFlowController extends BaseController {
 
     @Autowired
     private RedisCache redisCache;
+
+    // 7天过期
+    private static final Integer TIME_FALSE = 7;
 
     /**
      * @Description: 系统访问量
@@ -91,7 +95,7 @@ public class SysFlowController extends BaseController {
         // pvFlow进行累计操作
         Integer pvFlowNum = 1;
         if (StringUtils.isNull(redisCache.getCacheObject(pvFlow))) {
-            redisCache.setCacheObject(pvFlow, pvFlowNum);
+            redisCache.setCacheObject(pvFlow, pvFlowNum, TIME_FALSE,TimeUnit.DAYS);
         } else {
             redisCache.setCacheObject(pvFlow, (Integer) redisCache.getCacheObject(pvFlow) + 1);
         }
@@ -107,7 +111,7 @@ public class SysFlowController extends BaseController {
             uvCode = CodeUtil.getCode();
         }
         uvSet.add(uvCode);
-        redisCache.setCacheObject(uvFlow, uvSet);
+        redisCache.setCacheObject(uvFlow, uvSet, TIME_FALSE,TimeUnit.DAYS);
 
         // ipFlow进行ip去重
         String ipAddr = IpUtils.getIpAddr(request);
@@ -117,7 +121,7 @@ public class SysFlowController extends BaseController {
             ipSet = ((HashSet) redisCache.getCacheObject(ipFlow));
         }
         ipSet.add(ipAddr);
-        redisCache.setCacheObject(ipFlow, ipSet);
+        redisCache.setCacheObject(ipFlow, ipSet ,TIME_FALSE,TimeUnit.DAYS);
 
         // ip类型,来源
         HashSet ipTypeSet = new HashSet<>();
@@ -126,7 +130,7 @@ public class SysFlowController extends BaseController {
             ipTypeSet = ((HashSet) redisCache.getCacheObject(ipTypeFlow));
         }
         ipTypeSet.add(ipAddr);
-        redisCache.setCacheObject(ipTypeFlow, ipTypeSet);
+        redisCache.setCacheObject(ipTypeFlow, ipTypeSet, TIME_FALSE,TimeUnit.DAYS);
 
         // 判断合计IP键是否存在
         HashSet ipAllSet = new HashSet<>();
@@ -134,7 +138,7 @@ public class SysFlowController extends BaseController {
             ipAllSet = ((HashSet) redisCache.getCacheObject(ipAllFlow));
         }
         ipAllSet.add(ipAddr);
-        redisCache.setCacheObject(ipAllFlow, ipAllSet);
+        redisCache.setCacheObject(ipAllFlow, ipAllSet, TIME_FALSE,TimeUnit.DAYS);
 
         AjaxResult ajaxResult = new AjaxResult(HttpStatus.SUCCESS, msg, uvCode);
         return ajaxResult;
