@@ -138,7 +138,7 @@ public class SysFlowController extends BaseController {
             ipAllSet = ((HashSet) redisCache.getCacheObject(ipAllFlow));
         }
         ipAllSet.add(ipAddr);
-        redisCache.setCacheObject(ipAllFlow, ipAllSet, TIME_FALSE,TimeUnit.DAYS);
+        redisCache.setCacheObject(ipAllFlow, ipAllSet);
 
         AjaxResult ajaxResult = new AjaxResult(HttpStatus.SUCCESS, msg, uvCode);
         return ajaxResult;

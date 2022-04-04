@@ -381,6 +381,8 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 20,
+        orderByColumn: "create_time",
+        isAsc: "desc",
 #foreach ($column in $columns)
 #if($column.query)
         $column.javaField: null#if($foreach.count != $columns.size()),#end
