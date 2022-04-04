@@ -60,7 +60,7 @@
 
 官网地址：https://sourcebyte.cn
 
-项目运行文档：https://www.yuque.com/docs/share/8814f4ae-991e-4f1f-bb98-7e4636b28eea?#
+项目运行文档：http://47.243.114.191:8082/index.html
 
 ### 番外篇
 
