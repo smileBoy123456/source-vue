@@ -24,11 +24,11 @@
 
 ### 在线体验
 
-演示地址：http://47.243.114.191:8081
-
-官网地址：https://sourcebyte.cn
+演示地址：http://47.243.114.191:8081/login
 
 项目运行文档：http://47.243.114.191:8082/index.html
+
+官网地址：https://sourcebyte.cn
 
 ### 内置业务功能 
 1.  [CMS内容管理](https://sourcebyte.cn)
