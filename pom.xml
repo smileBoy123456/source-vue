@@ -241,14 +241,14 @@
                 <version>${source.version}</version>
             </dependency>
 
-            <!-- wms模块-->
+            <!-- wms模块闭源-->
             <dependency>
                 <groupId>cn.source</groupId>
                 <artifactId>source-wms</artifactId>
                 <version>${source.version}</version>
             </dependency>
 
-            <!-- 相亲模块-->
+            <!-- 相亲模块闭源-->
             <dependency>
                 <groupId>cn.source</groupId>
                 <artifactId>source-love</artifactId>
