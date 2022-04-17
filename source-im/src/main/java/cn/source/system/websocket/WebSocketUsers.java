@@ -39,6 +39,15 @@ public class WebSocketUsers
     }
 
     /**
+     * 获取用户
+     *
+     * @param key 唯一键
+     */
+    public static Session get(String key) {
+        return USERS.get(key);
+    }
+
+    /**
      * 移除用户
      *
      * @param session 用户信息

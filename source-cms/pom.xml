@@ -22,6 +22,17 @@
             <groupId>cn.source</groupId>
             <artifactId>source-common</artifactId>
         </dependency>
+        <!-- dom4j-->
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <!-- websocket-->
+        <dependency>
+            <groupId>cn.source</groupId>
+            <artifactId>source-im</artifactId>
+        </dependency>
 
     </dependencies>
 

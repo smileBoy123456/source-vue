@@ -23,12 +23,6 @@
             <artifactId>source-common</artifactId>
         </dependency>
 
-        <!-- 消息模块-->
-        <dependency>
-            <groupId>cn.source</groupId>
-            <artifactId>source-cms</artifactId>
-        </dependency>
-
         <!-- SpringBoot Websocket -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

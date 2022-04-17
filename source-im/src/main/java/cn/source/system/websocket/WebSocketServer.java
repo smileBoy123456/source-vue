@@ -1,8 +1,6 @@
 package cn.source.system.websocket;
 
-import cn.source.system.constant.MsgConstant;
-import cn.source.system.domain.CmsMsg;
-import cn.source.system.service.ICmsMsgService;
+import cn.source.common.core.redis.RedisCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 /**
  * websocket 消息处理
@@ -26,16 +25,25 @@ public class WebSocketServer
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketServer.class);
 
+    /**
+     * 注入消息redis
+     */
+    private static RedisCache redisCache;
+
+    @Autowired
+    public void setRedisCache(RedisCache redisCache) {
+        this.redisCache = redisCache;
+    }
 
     /**
      * 注入消息service
      */
-    private static ICmsMsgService cmsMsgService;
+   /* private static ICmsMsgService cmsMsgService;
 
     @Autowired
     public void setCmsMsgService(ICmsMsgService cmsMsgService) {
         this.cmsMsgService = cmsMsgService;
-    }
+    }*/
 
     /**
      * 默认最多允许同时在线人数1000
@@ -109,19 +117,25 @@ public class WebSocketServer
     @OnMessage
     public void onMessage(String message, Session session)
     {
-        String msg = message.replace("你", "我").replace("吗", "");
-        LOGGER.info("\n 连接信息 - {}", session.getId());
-        LOGGER.info("\n 收到消息 - {}", message);
-        // 收到消息写入数据表中
-        CmsMsg cmsMsg = new CmsMsg();
-        cmsMsg.setMsgType(MsgConstant.SYS_USER);
-        cmsMsg.setMsgContent(message);
-        cmsMsg.setAvatar(MsgConstant.USER_AVATAR);
-        cmsMsg.setMsgFromSession(session.getId());
-        // 查询管理员的session,set到tosession
-        cmsMsgService.insertCmsMsg(cmsMsg);
-        // 回消息
-        msg = "请留下你的联系方式，稍后会有产品经理联系你";
-        WebSocketUsers.sendMessageToUserByText(session, msg);
-}
+        if(message.length()>80){
+            //先暂定字符大于80为ticket,后面把message定位为json，进行类型判断
+            // key=message=ticket
+            redisCache.setCacheObject(message,session.getId(),1,TimeUnit.HOURS);
+        }else{
+            String msg = message.replace("你", "我").replace("吗", "");
+            LOGGER.info("\n 连接信息 - {}", session.getId());
+            LOGGER.info("\n 收到消息 - {}", message);
+            // // 收到消息写入数据表中 -------- 这样耦合严重，且出现循环依赖问题，后面使用Mq解决
+            // CmsMsg cmsMsg = new CmsMsg();
+            // cmsMsg.setMsgType(MsgConstant.SYS_USER);
+            // cmsMsg.setMsgContent(message);
+            // cmsMsg.setAvatar(MsgConstant.USER_AVATAR);
+            // cmsMsg.setMsgFromSession(session.getId());
+            // // 查询管理员的session,set到tosession
+            // cmsMsgService.insertCmsMsg(cmsMsg);
+            // 回消息
+            msg = "客服不在线，请添加经理微信(18720989281)";
+            WebSocketUsers.sendMessageToUserByText(session, msg);
+        }
+    }
 }
