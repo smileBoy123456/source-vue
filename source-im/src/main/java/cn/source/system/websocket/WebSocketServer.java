@@ -1,6 +1,7 @@
 package cn.source.system.websocket;
 
 import cn.source.common.core.redis.RedisCache;
+import cn.source.common.utils.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,8 +120,8 @@ public class WebSocketServer
     {
         if(message.length()>80){
             //先暂定字符大于80为ticket,后面把message定位为json，进行类型判断
-            // key=message=ticket
-            redisCache.setCacheObject(message,session.getId(),1,TimeUnit.HOURS);
+            // key=message=ticket DateUtils.getDate()+":" 文件夹形式存储
+            redisCache.setCacheObject(DateUtils.getDate()+":"+message,session.getId(),1,TimeUnit.HOURS);
         }else{
             String msg = message.replace("你", "我").replace("吗", "");
             LOGGER.info("\n 连接信息 - {}", session.getId());
@@ -134,8 +135,9 @@ public class WebSocketServer
             // // 查询管理员的session,set到tosession
             // cmsMsgService.insertCmsMsg(cmsMsg);
             // 回消息
-            msg = "客服不在线，请添加经理微信(18720989281)";
+            msg = "客服不在线，请添加经理微信(187-2098-9281)";
             WebSocketUsers.sendMessageToUserByText(session, msg);
         }
     }
+
 }

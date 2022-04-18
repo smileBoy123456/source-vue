@@ -1,14 +1,19 @@
 package cn.source.system.utils;
 
+import cn.source.common.utils.http.HttpUtils;
+import com.alibaba.fastjson.JSONObject;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 签名认证工具类
  * @ClassName:  WxCheckUtil
  *
  */
-public class WxCheckUtil {
+public class WxUtil {
 
 	// 与接口配置信息中的Token要一致
     private static String token = "sourcebyte";
@@ -87,46 +92,34 @@ public class WxCheckUtil {
         }
     }
 
-/*    *//**
-     * 获取AccessToken
-     * @return
-     *//*
-    public static String obtainAccessToken(){
-        String G_APPID = “公众号的APPID”;
-        String G_SECRET = “公众号的SECRET”;
-        String tokenData = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+G_APPID+"&secret="+G_SECRET;
+    //获取AccessToken
+    public static String obtainAccessToken(String APPID,String SECRET){
+        String tokenData = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+APPID+"&secret="+SECRET;
         // 返回的用户信息json字符串
-        JSONObject jsonObject = httpRequestUtil(tokenData);
+        String resp = HttpUtils.sendGet(tokenData);
+        JSONObject jsonObject = JSONObject.parseObject(resp);
         return String.valueOf(jsonObject.get("access_token"));
     }
 
-    *//**
-     * 获取订阅用户的openid和unionid
-     * @param accessToken
-     * @param openId
-     * @return
-     *//*
-    public static OpenUnionIdRelationDO obtainUserDetail(String accessToken,String openId){
+    //获取订阅用户的openid和unionid
+    public static Map obtainUserDetail(String accessToken, String openId){
         String openInfoUrl = "https://api.weixin.qq.com/cgi-bin/user/info?access_token="+accessToken+"&openid="+openId+"&lang=zh_CN";
-        JSONObject userDetail = httpRequestUtil(openInfoUrl);
+        String resp = HttpUtils.sendGet(openInfoUrl);
+        JSONObject userDetail = JSONObject.parseObject(resp);
         String openid = userDetail.getString("openid");
+        Integer subscribe = userDetail.getInteger("subscribe");
         Integer subscribeTime = userDetail.getInteger("subscribe_time");
         String unionid = userDetail.getString("unionid");
-
-        OpenUnionIdRelationDO openDO = new OpenUnionIdRelationDO();
-        openDO.setOpenId(openid);
-        openDO.setUnionId(unionid);
-        // 时间类型转换 10位时间戳转 yyyy-MM-dd HH:mm:ss
-        String st = "";
-        if (null != subscribeTime){
-            st = DateUtils.timestampToString(subscribeTime);
-        }
-        openDO.setSubscribeTime(st);
-        openDO.setCreateTime(new Date());
-        return openDO;
+        HashMap<String, Object> userDetailMap = new HashMap<>();
+        userDetailMap.put("openid",openid);
+        // subscribe 1:关注 0：取关
+        userDetailMap.put("subscribe",subscribe);
+        userDetailMap.put("subscribeTime",subscribeTime);
+        userDetailMap.put("unionid",unionid);
+        return userDetailMap;
     }
 
-    *//**
+    /*    **//**
      * 给关注该公众好的用户发送信息
      * @throws Exception
      *//*
@@ -181,5 +174,18 @@ public class WxCheckUtil {
         jsonData.put("data",data);
         HttpUtil.post(path, jsonData.toJSONString());
     }*/
-
+    public static void main(String[] args) {
+        String G_APPID = "wx5303bd2b8b468ec7";
+        String G_SECRET = "bdc812844574980e36b69c3ca93a7d8e";
+        String tokenData = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+G_APPID+"&secret="+G_SECRET;
+        // 返回的用户信息json字符串
+        String resp = HttpUtils.sendGet(tokenData);
+        JSONObject jsonObject = JSONObject.parseObject(resp);
+        System.out.println("token:"+jsonObject.get("access_token"));
+        HttpUtils.sendGet(tokenData);
+        String openInfoUrl = "https://api.weixin.qq.com/cgi-bin/user/info?access_token="+jsonObject.get("access_token")+"&openid=oM3w46__sVVjRWGUU4FGSwYOypTg&lang=zh_CN";
+        String resp2 = HttpUtils.sendGet(openInfoUrl);
+        JSONObject userDetail = JSONObject.parseObject(resp2);
+        System.out.println(userDetail);
+    }
 }
