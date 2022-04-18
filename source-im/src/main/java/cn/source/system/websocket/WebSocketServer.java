@@ -75,7 +75,6 @@ public class WebSocketServer
             WebSocketUsers.put(session.getId(), session);
             LOGGER.info("\n 建立连接 - {}", session);
             LOGGER.info("\n 当前人数 - {}", WebSocketUsers.getUsers().size());
-           // WebSocketUsers.sendMessageToUserByText(session, "连接成功");
         }
     }
 
@@ -121,7 +120,8 @@ public class WebSocketServer
         if(message.length()>80){
             //先暂定字符大于80为ticket,后面把message定位为json，进行类型判断
             // key=message=ticket DateUtils.getDate()+":" 文件夹形式存储
-            redisCache.setCacheObject(DateUtils.getDate()+":"+message,session.getId(),1,TimeUnit.HOURS);
+            String ticketCacheKey= DateUtils.getDate()+":"+message;
+            redisCache.setCacheObject(ticketCacheKey,session.getId(),30,TimeUnit.MINUTES);
         }else{
             String msg = message.replace("你", "我").replace("吗", "");
             LOGGER.info("\n 连接信息 - {}", session.getId());

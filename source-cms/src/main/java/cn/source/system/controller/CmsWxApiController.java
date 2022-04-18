@@ -75,9 +75,11 @@ public class CmsWxApiController extends BaseController {
         LOGGER.info("微信公众号接收信息:{},{},{},{},{},{},{}",toUserName,fromUserName,createTime,msgType,event,eventKey,ticket);
         // 定义变量判断是否已关注，已经关注则自动登录，否则等待subscribe关注事件
         if(StringUtils.isNotEmpty(ticket)){
-           String token = redisCache.getCacheObject(accessTokenKey);
-           Map map = WxUtil.obtainUserDetail(token, fromUserName);
-           WebSocketUsers.sendMessageToUserByText( WebSocketUsers.get( redisCache.getCacheObject(DateUtils.getDate()+":"+ticket)), map.get("subscribe").toString());
+           Object token = redisCache.getCacheObject(accessTokenKey);
+           Map map = WxUtil.obtainUserDetail(token.toString(), fromUserName);
+           String ticketCacheKey= DateUtils.getDate()+":"+ticket;
+           String sessionId = redisCache.getCacheObject(ticketCacheKey);
+           WebSocketUsers.sendMessageToUserByText( WebSocketUsers.get(sessionId), map.get("subscribe").toString());
         }
         return null;
     }
@@ -87,11 +89,9 @@ public class CmsWxApiController extends BaseController {
      */
     @GetMapping("/getAccessToken")
     public Object getAccessToken(){
-        Object token = redisCache.getCacheObject(accessTokenKey);
-        if(StringUtils.isNull(token)){
-            token = WxUtil.obtainAccessToken(APPID, SECRET);
-            redisCache.setCacheObject(accessTokenKey,token,1, TimeUnit.HOURS);
-        }
+        // 2000上限
+        Object token = WxUtil.obtainAccessToken(APPID, SECRET);
+        redisCache.setCacheObject(accessTokenKey,token,30,TimeUnit.MINUTES);
         return token;
     }
 
