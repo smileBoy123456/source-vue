@@ -174,9 +174,10 @@ public class WxUtil {
         jsonData.put("data",data);
         HttpUtil.post(path, jsonData.toJSONString());
     }*/
+
     public static void main(String[] args) {
-        String G_APPID = "wx5303bd2b8b468ec7";
-        String G_SECRET = "bdc812844574980e36b69c3ca93a7d8e";
+        String G_APPID = "G_APPID";
+        String G_SECRET = "G_SECRET";
         String tokenData = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+G_APPID+"&secret="+G_SECRET;
         // 返回的用户信息json字符串
         String resp = HttpUtils.sendGet(tokenData);

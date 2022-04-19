@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims;
 
 /**
  * 通用常量信息
- * 
+ *
  * @author ruoyi
  */
 public class Constants
@@ -164,4 +164,8 @@ public class Constants
      */
     public static final String[] JOB_ERROR_STR = { "java.net.URL", "javax.naming.InitialContext", "org.yaml.snakeyaml",
             "org.springframework", "org.apache", "cn.source.common.utils.file" };
+
+    /** 校验返回结果码 */
+    public final static String UNIQUE = "0";
+    public final static String NOT_UNIQUE = "1";
 }
