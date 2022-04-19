@@ -25,13 +25,9 @@
 * 高效率开发，使用代码生成器可以一键生成前后端代码。
 
 ### 在线体验
-
-演示地址：http://boot.sourcebyte.cn:8081/login
-
-开发文档：http://doc.sourcebyte.cn:8082/index.html
-
-官网地址：https://sourcebyte.cn
-
+* 演示地址：http://boot.sourcebyte.cn:8081/login
+* 开发文档：http://doc.sourcebyte.cn:8082/index.html
+* 官网地址：https://sourcebyte.cn
 ### 内置业务功能 
 1.  [CMS内容管理](https://sourcebyte.cn)
 2.  [智慧租房](http://47.243.114.191:8080/house)
