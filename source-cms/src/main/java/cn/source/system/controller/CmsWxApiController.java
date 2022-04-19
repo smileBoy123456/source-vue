@@ -79,7 +79,10 @@ public class CmsWxApiController extends BaseController {
            Map map = WxUtil.obtainUserDetail(token.toString(), fromUserName);
            String ticketCacheKey= DateUtils.getDate()+":"+ticket;
            String sessionId = redisCache.getCacheObject(ticketCacheKey);
-           WebSocketUsers.sendMessageToUserByText( WebSocketUsers.get(sessionId), map.get("subscribe").toString());
+           // sessionId可能已经失效，则不发消息
+           if(StringUtils.isNotNull(sessionId)){
+               WebSocketUsers.sendMessageToUserByText( WebSocketUsers.get(sessionId), map.get("subscribe").toString());
+           }
         }
         return null;
     }
@@ -90,8 +93,11 @@ public class CmsWxApiController extends BaseController {
     @GetMapping("/getAccessToken")
     public Object getAccessToken(){
         // 2000上限
-        Object token = WxUtil.obtainAccessToken(APPID, SECRET);
-        redisCache.setCacheObject(accessTokenKey,token,30,TimeUnit.MINUTES);
+        Object token = redisCache.getCacheObject(accessTokenKey);
+        if(StringUtils.isNull(token)){
+            token = WxUtil.obtainAccessToken(APPID, SECRET);
+            redisCache.setCacheObject(accessTokenKey,token,30,TimeUnit.MINUTES);
+        }
         return token;
     }
 
