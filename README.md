@@ -12,13 +12,14 @@
 * PC端采用Vue、Element UI。
 * 后端采用Spring Boot、Mybatis、Spring Security、Redis & Jwt。
 * 移动端采用Vue、Uniapp、Uview。
-* 工作流使用Flowable、Bpmn.io。
-* 即时通讯使用T-io。
-* 类Excel拖拽赋值的Web数据录入 Handsontable。
-* 企业级Web报表工具 IReport
-* 单行编辑解决方案使用Vxe-table。
-* 可视化大屏数据展示使用DataV。
-* 权限认证使用Jwt，支持多终端认证系统。
+* 使用Flowable、Bpmn.io实现工作流。
+* 使用T-io,Websocket实现即时通讯。
+* 使用Handsontable实现类Excel拖拽赋值的Web数据录入。
+* 使用Vxe-table实现单行编辑，即时保存效果。
+* 使用IReport实现企业级Web报表。
+* 使用DataV展示可视化大屏数据。
+* 使用kkFileView实现在线预览，支持doc,docx,Excel,pdf,txt,zip,rar,图片等
+* 使用JustAuth实现三方应用OAuth 2授权 。
 * 支持加载动态权限菜单，多方式轻松权限控制。
 * 高效率开发，使用代码生成器可以一键生成前后端代码。
 
