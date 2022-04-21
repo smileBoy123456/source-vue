@@ -11,6 +11,7 @@
 * 后端采用Spring Boot、Mybatis、Spring Security、Redis & Jwt。
 * 移动端采用Vue、Uniapp、Uview。
 * 使用Flowable、Bpmn.io实现工作流。
+* 使用Gantt-elastic实现甘特图任务计划。
 * 使用T-io,Websocket实现即时通讯。
 * 使用Handsontable实现类Excel拖拽赋值的Web数据录入。
 * 使用Vxe-table实现单行编辑，即时保存效果。
